@@ -1,5 +1,5 @@
 #! /bin/bash
-isGitDir () {
+isGitDir() {
     if [ -d .git ]; then
         return 0
     else
@@ -7,7 +7,7 @@ isGitDir () {
     fi
 }
 
-branchIsDevelop () {
+branchIsDevelop() {
     if [ "$(git rev-parse --abbrev-ref HEAD)" == "development" ]; then
         return 0
     else
@@ -15,7 +15,7 @@ branchIsDevelop () {
     fi
 }
 
-handleGitPull () {
+handleGitPull() {
     if isGitDir && branchIsDevelop; then
         git pull
     else
@@ -23,13 +23,13 @@ handleGitPull () {
     fi
 }
 
-main(){
+main() {
     for dir in *; do
         if [ -d "$dir" ]; then
             cd "$dir" || exit
-            handleGitPull;
+            handleGitPull
             cd ..
         fi
     done
 }
-main;
+main
